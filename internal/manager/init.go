@@ -2,8 +2,8 @@ package manager
 
 import (
 	"passwdManager/pkg/typed"
+	"passwdManager/pkg/util"
 	"sync"
-	"time"
 )
 
 type PasswdManagerRoot struct{
@@ -31,15 +31,15 @@ func (r *PasswdManagerRoot)UpdatePasswd( newObj *typed.PM){
 	passwdManagerRoot.Lock()
 	defer passwdManagerRoot.Unlock()
 	passwdManagerRoot.WebName2PM[newObj.WebName] = newObj
-	newObj.LastUseTime = time.Now()
+	newObj.LastUseTime = util.GetCurrectTime()
 }
 
 func(r *PasswdManagerRoot)AddPasswd(obj *typed.PM){
 	passwdManagerRoot.Lock()
 	defer passwdManagerRoot.Unlock()
 	passwdManagerRoot.PasswdCount ++
-	obj.CreateTime = time.Now()
-	obj.LastUseTime = time.Now()
+	obj.CreateTime = util.GetCurrectTime()
+	obj.LastUseTime = util.GetCurrectTime()
 	passwdManagerRoot.WebName2PM[obj.WebName] = obj
 }
 
@@ -59,7 +59,7 @@ func(r *PasswdManagerRoot)GetPasswdByWebName(name string)typed.PM{
 	defer passwdManagerRoot.Unlock()
 	if v, ok := passwdManagerRoot.WebName2PM[name];ok{
 		tmp := v
-		passwdManagerRoot.WebName2PM[name].LastUseTime = time.Now()
+		passwdManagerRoot.WebName2PM[name].LastUseTime = util.GetCurrectTime()
 		return *tmp
 	}
 	return typed.PM{}

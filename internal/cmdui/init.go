@@ -1,6 +1,7 @@
 package cmdui
 
 import (
+	"fmt"
 	"passwdManager/internal/manager"
 	"passwdManager/pkg/contanst"
 	"passwdManager/pkg/typed"
@@ -60,9 +61,7 @@ func CmdUIStart() {
 			if manager.IsLogin(){
 				pms := manager.GetPMRoot().ListPasswd()
 				c.Println("password count: ", len(pms))
-				for _, pm := range pms{
-					c.Println(pm)
-				}
+				createUI(pms)
 			}else{
 				c.Println("please login")
 			}
@@ -80,6 +79,13 @@ func CmdUIStart() {
 	})
 
 	shell.Run()
+}
+
+func createUI(pms []typed.PM){
+	fmt.Println("*序号\t*网站名\t*用户名\t*密码*\t创建时间\t*上次使用时间**")
+	for _, pm := range pms{
+		fmt.Printf("%s\t%s\t  %s\t  %s\t  %s\t  %s\t\n", pm.ID, pm.WebName, pm.User, pm.Passwd, pm.CreateTime, pm.LastUseTime)
+	}
 }
 
 

@@ -1,6 +1,5 @@
 package typed
 
-import "time"
 
 //password manager
 type PM struct{
@@ -8,9 +7,9 @@ type PM struct{
 	WebName string
 	User string
 	Passwd  string
-	CreateTime time.Time
+	CreateTime string
 	//UpdateTime time.Time
-	LastUseTime time.Time
+	LastUseTime string
 }
 
 

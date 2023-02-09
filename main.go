@@ -1,6 +1,8 @@
 package main
 
-import "passwdManager/internal/cmdui"
+import (
+	"passwdManager/internal/cmdui"
+)
 
 
 func main(){
